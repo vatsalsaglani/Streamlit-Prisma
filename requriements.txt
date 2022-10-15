@@ -1,4 +1,0 @@
-prisma
-streamlit
-requests
-python-dotenv
