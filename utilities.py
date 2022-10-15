@@ -12,7 +12,7 @@ def generate_prisma_client():
     subprocess.call(["prisma", "generate"])
     print(f'GENERATED PRISMA CLIENT')
 
-
+generate_prisma_client()
 try:
     from prisma import Prisma
 except RuntimeError:
