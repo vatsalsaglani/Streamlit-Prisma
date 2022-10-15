@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider  = "prisma-client-py"
+  interface = "sync"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Movies {
+  id             BigInt      @id @default(autoincrement())
+  movieId        BigInt      @unique
+  movieId_mapped BigInt      @unique
+  imdbId         String
+  tmdbId         String
+  meta           Meta[]
+  cast           Cast[]
+  crew           Crew[]
+  video          Videos[]
+  backdrop       BackDrops[]
+  poster         Posters[]
+  genres         Genre[]
+}
+
+model Meta {
+  id           BigInt  @id @default(autoincrement())
+  title        String
+  overview     String?
+  popularity   Float?
+  backdrop     String?
+  poster       String?
+  release_date String?
+  runtime      BigInt?
+  rating       Float?
+  Movies       Movies? @relation(fields: [moviesId], references: [id])
+  moviesId     BigInt?
+}
+
+model Cast {
+  id        BigInt  @id @default(autoincrement())
+  name      String?
+  character String?
+  profile   String?
+  Movies    Movies? @relation(fields: [moviesId], references: [id])
+  moviesId  BigInt?
+}
+
+model Crew {
+  id         BigInt  @id @default(autoincrement())
+  name       String?
+  real_name  String?
+  department String?
+  profile    String?
+  job        String?
+  Movies     Movies? @relation(fields: [moviesId], references: [id])
+  moviesId   BigInt?
+}
+
+model Videos {
+  id          BigInt  @id @default(autoincrement())
+  name        String?
+  key         String?
+  site        String?
+  size        String?
+  type        String?
+  videoId     String?
+  is_official Boolean?
+  Movies      Movies? @relation(fields: [moviesId], references: [id])
+  moviesId    BigInt?
+}
+
+model BackDrops {
+  id       BigInt  @id @default(autoincrement())
+  path     String?
+  Movies   Movies? @relation(fields: [moviesId], references: [id])
+  moviesId BigInt?
+}
+
+model Posters {
+  id       BigInt  @id @default(autoincrement())
+  path     String?
+  Movies   Movies? @relation(fields: [moviesId], references: [id])
+  moviesId BigInt?
+}
+
+model Genre {
+  id       BigInt  @id @default(autoincrement())
+  genreId  BigInt?
+  name     String?
+  Movies   Movies? @relation(fields: [moviesId], references: [id])
+  moviesId BigInt?
+}
