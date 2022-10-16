@@ -2,7 +2,7 @@ import streamlit as st
 from utilities import Movies
 from components import card, grid
 
-st.set_page_config(page_title='Prisma Demo 💎', page_icon='💎')
+st.set_page_config(page_title='Prisma Demo', page_icon='💎')
 
 movObj = Movies()
 
