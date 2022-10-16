@@ -2,6 +2,12 @@ import streamlit as st
 from utilities import Movies
 from components import card, grid
 
+st.set_page_config(
+    page_title = 'Prisma Demo 💎',
+    page_icon = '💎'
+)
+
+
 movObj = Movies()
 
 st.markdown(
@@ -9,6 +15,12 @@ st.markdown(
 """,
     unsafe_allow_html=True)
 st.header("Prisma Demo")
+
+st.markdown("""
+## Introduction
+This application is connected to a PostgreSQL DB hosted on AWS RDS using Prisma. Its a small demo w.r.t. how once can use the simplicity of Streamlit and the powerful Prisma ORM
+""")
+
 movieText = st.text_input("Search Movies")
 
 if movieText:
